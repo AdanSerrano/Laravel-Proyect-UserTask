@@ -13,6 +13,7 @@ class TaskComponent extends Component
     public $title;
     public $description;
     public $modal = false;
+    public $isUpdating = false;
 
     public function mount()
     {
@@ -56,6 +57,8 @@ class TaskComponent extends Component
             'description' => 'required|string|max:500',
         ]);
 
+        $this->isUpdating = false;
+
         // Crear o actualizar tarea con el user_id
         Task::updateOrCreate(
             [
@@ -85,5 +88,6 @@ class TaskComponent extends Component
         $this->title = $task->title;
         $this->description = $task->description;
         $this->modal = true;
+        $this->isUpdating = true;
     }
 }
